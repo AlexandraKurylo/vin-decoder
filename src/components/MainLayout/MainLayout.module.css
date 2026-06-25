@@ -1,0 +1,46 @@
+.mainLayout {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 0;
+}
+
+.mainWrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  overflow-y: auto;
+}
+
+.main {
+  width: 100%;
+  flex-grow: 1;
+  color: var(--text-main);
+  background-color: var(--surface-base);
+}
+
+.mainContainer {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.footer {
+  font-size: 15px;;
+  background: var(--gradient-footer);
+  border-top: 1px solid var(--surface-header);
+  color: var(--text-main);
+}
+
+.footerContainer {
+  padding: 15px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+}
