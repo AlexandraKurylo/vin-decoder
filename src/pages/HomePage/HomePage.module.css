@@ -1,1 +1,128 @@
-.homePage {}
+.homePage {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.decoderSection,
+.historySection,
+.resultsSection {
+    background: var(--surface-card);
+    padding: 24px;
+    border-radius: 12px;
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+.form {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    background: var(--surface-base);
+    color: var(--text-main);
+    border: 1px solid var(--text-muted);
+}
+
+.historyList {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.resultsSection {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.resultsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.activeVinLabel {
+  font-size: 18px;
+  text-align: center;
+  color: var(--text-main); 
+  font-weight: 500;
+}
+
+.resultGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.resultCard {
+    padding: 12px;
+    border-bottom: 1px solid var(--text-muted);
+    background: var(--surface-result-card);
+    color: var(--text-main);
+}
+
+.errorCard {
+    background: var(--error-bg);
+    border: 1px solid var(--error-border);
+    color: var(--error-text);
+    border-radius: 8px;
+}
+
+.errorCard .label {
+    color: var(--error-text);
+}
+
+.label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--card-label);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.value {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    width: 100%;
+}
+
+.inputError {
+    border: 1px solid var(--status-error);
+}
+
+.errorMessage {
+    color: var(--status-error);
+    font-size: 12px;
+    display: block;
+}
+
+.resultsSection {
+  scroll-margin-top: 100px;
+}
+
+@media (max-width: 600px) {
+    .form {
+        flex-direction: column;
+    }
+
+    .resultGrid {
+        grid-template-columns: 1fr;
+    }
+}
