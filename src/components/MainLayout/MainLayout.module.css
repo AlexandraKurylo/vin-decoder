@@ -20,13 +20,13 @@
   width: 100%;
   flex-grow: 1;
   color: var(--text-main);
-  background-color: var(--surface-base);
+  background: var(--surface-base);
 }
 
 .mainContainer {
   max-width: 1480px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 100px 20px;
 }
 
 .footer {

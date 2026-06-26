@@ -1,0 +1,11 @@
+.errorBox {
+  margin: 20px 0;
+  padding: 16px;
+  background-color: #fff1f0; 
+  border: 1px solid #ffccc7;
+  border-radius: 8px;
+  color: #cf1322; 
+}
+.title {
+  margin: 0 0 8px 0;
+}
