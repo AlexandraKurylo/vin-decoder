@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { delayFn } from "../helpers/delayFn";
-import { toast } from "react-toastify";
 
-export const useFetch = (callback: (...args: any[]) => void): [(...args: any[]) => Promise<void>, boolean, string] => {
+export const useFetch = (callback: (...args: any[]) => Promise<any>): [(...args: any[]) => Promise<any>, boolean, string] => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
@@ -13,9 +12,9 @@ export const useFetch = (callback: (...args: any[]) => void): [(...args: any[]) 
       await delayFn();
       const response = await callback(...args);
       return response;
-    } catch (error: any) {
-      setError(error?.message);
-      toast.error(error?.message);
+    } catch (err: any) {
+      setError(err?.message || "Щось пішло не так");
+      return null;
     } finally {
       setIsLoading(false);
     }
