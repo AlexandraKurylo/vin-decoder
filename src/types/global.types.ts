@@ -9,5 +9,9 @@ export interface IThemeContext {
 export interface IVinResult {
   Variable: string;
   Value: string;
-  VariableId?: string | number; // Знак питання робить поле необов'язковим
+  VariableId?: string | number;
+}
+
+export interface IVinResponse {
+  Results: IVinResult[];
 }

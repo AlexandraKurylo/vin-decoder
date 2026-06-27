@@ -1,12 +1,11 @@
 import { useState, useRef } from "react";
-import { vinApi } from "../../api/vinApi";
+import { useLazyDecodeVinQuery } from "../../api/vin.api.";
 import { useHistory } from "../../hooks/useHistory";
 import { Button } from "../../components/Button/Button";
 import { VIN_LENGTH } from "../../constants/global.constants";
 import cls from "./HomePage.module.css";
 import type { IVinResult } from "../../types/global.types";
 import { Loader } from "../../components/Loader";
-import { useFetch } from "../../hooks/useFetch";
 import { ErrorBlock } from "../../components/ErrorBlock";
 import { vinSchema } from "../../utils/validation.schema";
 
@@ -15,10 +14,9 @@ export const HomePage = () => {
   const [vehicleCharacteristics, setVehicleCharacteristics] = useState<IVinResult[]>([]);
   const [searchHistory, addToSearchHistory] = useHistory();
   const [activeVin, setActiveVin] = useState<string | null>(null);
-  const [isError, setIsError] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
-  const [performVinDecoding, isDecodingInProgress, decodingError] = useFetch(vinApi.decodeVin);
-
+  const [isError, setIsError] = useState(false);
+  const [trigger, { isLoading, error }] = useLazyDecodeVinQuery();
   const resultsSectionRef = useRef<HTMLDivElement>(null);
 
   const handleDecode = async (targetVin: string) => {
@@ -26,41 +24,42 @@ export const HomePage = () => {
     setValidationError(null);
 
     const result = vinSchema.safeParse({ vin: targetVin });
-
     if (!result.success) {
       setValidationError(result.error.issues[0].message);
       return;
     }
 
-    const results = await performVinDecoding(targetVin.trim());
-    if (!results) return;
+    try {
+      const results = await trigger(targetVin).unwrap();
 
-    setActiveVin(targetVin);
+      if (!results) return;
 
-    const errorEntry = results.find((item: any) => item.Variable === "Error Text");
-    const errorCodeEntry = results.find((item: any) => item.Variable === "Error Code");
-    const isErrorStatus = errorCodeEntry && errorCodeEntry.Value !== "0";
+      setActiveVin(targetVin);
+      const errorEntry = results.find((item: any) => item.Variable === "Error Text");
+      const errorCodeEntry = results.find((item: any) => item.Variable === "Error Code");
+      const isErrorStatus = errorCodeEntry && errorCodeEntry.Value !== "0";
 
-    if (isErrorStatus) {
-      setVehicleCharacteristics([
-        { Variable: "Error Code", Value: errorCodeEntry.Value, VariableId: 0 },
-        { Variable: "Error Text", Value: errorEntry?.Value || "Unknown error", VariableId: 0 },
-      ]);
+      if (isErrorStatus) {
+        setVehicleCharacteristics([
+          { Variable: "Error Code", Value: errorCodeEntry.Value, VariableId: 0 },
+          { Variable: "Error Text", Value: errorEntry?.Value || "Unknown error", VariableId: 0 },
+        ]);
+        setIsError(true);
+      } else if (results.length > 0) {
+        setVehicleCharacteristics(results.filter((item: any) => item.Value));
+        addToSearchHistory(targetVin);
+      } else {
+        setVehicleCharacteristics([{ Variable: "Error", Value: "No data found for this VIN.", VariableId: 0 }]);
+        setIsError(true);
+      }
+
+      setTimeout(() => {
+        resultsSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    } catch (err) {
       setIsError(true);
-    } else if (results.length > 0) {
-      setVehicleCharacteristics(results.filter((item: any) => item.Value));
-      addToSearchHistory(targetVin);
-    } else {
-      setVehicleCharacteristics([{ Variable: "Error", Value: "No data found for this VIN.", VariableId: 0 }]);
-      setIsError(true);
+      console.error("Fetch error:", err);
     }
-
-    setTimeout(() => {
-      resultsSectionRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }, 100);
   };
 
   const handleClear = () => {
@@ -101,14 +100,14 @@ export const HomePage = () => {
             {validationError && <span className={cls.errorMessage}>{validationError}</span>}
           </div>
 
-          <Button type="submit" disabled={isDecodingInProgress}>
-            {isDecodingInProgress ? "Processing..." : "Decode"}
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? "Processing..." : "Decode"}
           </Button>
         </form>
       </section>
 
-      {isDecodingInProgress && <Loader />}
-      {decodingError && <ErrorBlock errorText={decodingError} />}
+      {isLoading && <Loader />}
+      {error && <ErrorBlock errorText="An error occurred while decoding." />}
 
       {searchHistory.length > 0 && (
         <section className={cls.historySection}>
