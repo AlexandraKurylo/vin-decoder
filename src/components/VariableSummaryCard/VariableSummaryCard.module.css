@@ -1,0 +1,48 @@
+.card {
+  background: var(--surface-card);
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid var(--btn-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  will-change: transform;
+}
+
+.title {
+  color: var(--text-main);
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.group {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.detailsBtn {
+  display: inline-block;
+  background: var(--surface-btn);
+  color: #ffffff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid var(--btn-border);
+  transition: all 0.2s;
+}
+
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+
+  .detailsBtn:hover {
+    filter: brightness(1.2);
+  }
+}
