@@ -4,7 +4,11 @@
 
 AutoID is a web application designed for decoding vehicle VIN (Vehicle Identification Number) codes. It allows users to retrieve detailed technical specifications of a vehicle quickly and efficiently by entering its unique identification number.
 
+---
+
 ## 🚀 [Live Demo]()
+
+---
 
 ## 📋 Key Features
 
@@ -17,6 +21,8 @@ AutoID is a web application designed for decoding vehicle VIN (Vehicle Identific
 - Interactive UI: Fully responsive design with support for Light and Dark themes.
 
 - Detail View: Access extended information for each specific vehicle variable.
+
+---
 
 ## 🏗 Architecture & Implementation
 
@@ -34,6 +40,8 @@ The application is built with a modular, scalable architecture, focusing on clea
 
 - Custom Hooks: Business logic is encapsulated in custom hooks (like useHistory or useTheme), keeping UI components lightweight and easy to maintain.
 
+---
+
 ## 🛠 Tech Stack
 
 - Language: TypeScript
@@ -48,10 +56,13 @@ The application is built with a modular, scalable architecture, focusing on clea
 
 - Styling: CSS Modules
 
+---
+
 ## Folder Structure
 
 ```text
 src/
+├── assets/                 # Static assets (preview image)
 ├── api/                    # API layer (RTK Query definitions and base queries)
 │ ├── baseQuery.ts
 │ ├── variables.api.ts
@@ -93,6 +104,8 @@ src/
 ├── index.css
 └── main.tsx
 ```
+
+---
 
 ## How to run a project locally
 
