@@ -1,75 +1,121 @@
-# React + TypeScript + Vite
+# AutoID - VIN Decoder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Project Preview](./src/assets/preview.png)
 
-Currently, two official plugins are available:
+AutoID is a web application designed for decoding vehicle VIN (Vehicle Identification Number) codes. It allows users to retrieve detailed technical specifications of a vehicle quickly and efficiently by entering its unique identification number.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 [Live Demo]()
 
-## React Compiler
+## 📋 Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- VIN Decoding: Retrieve comprehensive vehicle technical specifications via API.
 
-## Expanding the ESLint configuration
+- Search & Filter: Search for vehicle variables by name or group.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Pagination: User-friendly navigation through the variables list with 15 items per page.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Interactive UI: Fully responsive design with support for Light and Dark themes.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Detail View: Access extended information for each specific vehicle variable.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🏗 Architecture & Implementation
 
+The application is built with a modular, scalable architecture, focusing on clean separation of logic and type safety.
+
+- API Layer: Implemented with Redux Toolkit Query for declarative data fetching. It includes a custom baseQuery with an artificial delay to demonstrate loading states and centralized error handling through transformErrorResponse.
+
+- State Management: Uses a unified Redux store that integrates API slices and middleware, ensuring efficient cache management and data consistency.
+
+- Theme Management: A custom ThemeProvider using React Context API handles light/dark modes, with state persistence in localStorage.
+
+- Validation: All input data (like VIN codes) is validated using Zod schemas, ensuring data integrity before any network request is initiated.
+
+- Domain Logic: Application configurations (API endpoints, storage keys, constants) and TypeScript interfaces are centralized in constants/ and types/ folders to act as a "single source of truth."
+
+- Custom Hooks: Business logic is encapsulated in custom hooks (like useHistory or useTheme), keeping UI components lightweight and easy to maintain.
+
+## 🛠 Tech Stack
+
+- Language: TypeScript
+
+- Library: React
+
+- State Management: Redux Toolkit (RTK Query)
+
+- Theme Management: React Context API
+
+- Routing: React Router
+
+- Styling: CSS Modules
+
+## Folder Structure
+
+```text
+src/
+├── api/                    # API layer (RTK Query definitions and base queries)
+│ ├── baseQuery.ts
+│ ├── variables.api.ts
+│ └── vin.api.ts
+├── components/             # Reusable UI components
+│ ├── Button/
+│ ├── ErrorBlock/
+│ ├── Header/
+│ ├── Loader/
+│ ├── MainLayout/
+│ ├── VariableDetailCard/
+│ ├── VariableSummaryCard/
+├── constants/              # Global application constants
+│ └── global.constants.ts
+├── features/               # Complex, self-contained functional modules (e.g., ThemeToggler)
+│ └── ThemeToggler/
+├── helpers/                # Pure utility functions (data formatting, delay)
+│ ├── dateFormat.ts
+│ └── delayFn.ts
+├── hooks/                  # Custom React hooks
+│ ├── useHistory.ts
+│ └── useTheme.ts
+├── pages/                  # Page-level components (routes)
+│ ├── HomePage/
+│ ├── NotFoundPage/
+│ ├── VariablePage/
+│ ├── VariablesPage/
+├── store/                  # Redux Toolkit store configuration
+│ └── store.ts
+├── theme/                  # Theme provider and design tokens
+│ ├── index.ts
+│ └── ThemeProvider.tsx
+├── types/                  # TypeScript interfaces and enums
+│ ├── global.enums.ts
+│ └── global.types.ts
+├── utils/                  # Helper utility for validation
+│ └── validation.schema.ts
+├── App.tsx
+├── index.css
+└── main.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## How to run a project locally
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Open a terminal and run the command:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1. Clone the repository:
 
+```bash
+git clone [https://github.com/AlexandraKurylo/vin-decoder](https://github.com/AlexandraKurylo/vin-decoder)
 ```
+
+### 2. Install dependencies:
+
+```bash
+   npm install
+```
+
+### 3. Start the development server:
+
+```bash
+   npm run dev
+```
+
+#### 4. Open in browser:
+
+The app will be running at http://localhost:5173
