@@ -15,3 +15,8 @@ export interface IVinResult {
 export interface IVinResponse {
   Results: IVinResult[];
 }
+
+export interface IApiError {
+  status: number | string;
+  message: string;
+}

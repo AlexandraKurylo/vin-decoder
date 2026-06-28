@@ -1,5 +1,5 @@
 :root {
-  --brand-primary: #007bff;
+  --brand-primary: #264fc8;
   --surface-base: linear-gradient(180deg, #2b303b 0%, #1e2229 100%);
   --surface-card: linear-gradient(145deg,
       #4a5568 0%,
@@ -51,12 +51,12 @@ a {
 }
 
 body {
-  color: var(--text-color);
-  background-color: var(--main-bg-color);
+  color: var(--text-main);
+  background: var(--surface-base);
 }
 
 .darkLayout {
-  --brand-primary: #007bff;
+  --brand-primary: #264fc8;
   --surface-base: linear-gradient(180deg, #2b303b 0%, #1e2229 100%);
 
   --surface-card: linear-gradient(145deg,
@@ -87,7 +87,7 @@ body {
 
 @media (prefers-color-scheme: light) {
   :root {
-    --brand-primary: #007bff;
+    --brand-primary: #264fc8;
     --surface-base: linear-gradient(180deg, #f0f2f5 0%, #e1e4e8 100%);
     --surface-card: linear-gradient(145deg,
         #d6dde4 0%,
@@ -118,7 +118,7 @@ body {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --brand-primary: #007bff;
+    --brand-primary: #264fc8;
     --surface-base: linear-gradient(180deg, #2b303b 0%, #1e2229 100%);
 
     --surface-card: linear-gradient(145deg,
