@@ -1,0 +1,1 @@
+export { VariableDetailCard } from "./VariableDetailCard";
