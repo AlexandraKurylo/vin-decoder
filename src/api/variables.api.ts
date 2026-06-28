@@ -1,19 +1,6 @@
 import { createApi, type FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithDelay } from "../api/baseQuery";
-import type { IApiError } from "../types/global.types";
-
-export interface IVariable {
-  ID: number;
-  Name: string;
-  Description: string;
-  GroupName: string;
-  DataType: string;
-}
-
-interface IVariableResponse {
-  Results: IVariable[];
-  Message: string;
-}
+import type { IApiError, IVariable, IVariableResponse } from "../types/global.types";
 
 export const variablesApi = createApi({
   reducerPath: "variablesApi",

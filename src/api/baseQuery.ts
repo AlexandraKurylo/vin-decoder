@@ -6,9 +6,10 @@ import {
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
 import { delayFn } from "../helpers/delayFn";
+import { API_BASE_URL } from "../constants/global.constants";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://vpic.nhtsa.dot.gov/api/",
+  baseUrl: API_BASE_URL,
 });
 
 export const baseQueryWithDelay: BaseQueryFn<

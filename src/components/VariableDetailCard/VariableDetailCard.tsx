@@ -1,5 +1,5 @@
 import cls from "./VariableDetailCard.module.css";
-import type { IVariable } from "../../api/variables.api";
+import type { IVariable } from "../../types/global.types";
 
 export const VariableDetailCard = ({ variable }: { variable: IVariable }) => {
   const cleanDescription = (html: string) => {

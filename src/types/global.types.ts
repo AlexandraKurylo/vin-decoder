@@ -20,3 +20,16 @@ export interface IApiError {
   status: number | string;
   message: string;
 }
+
+export interface IVariable {
+  ID: number;
+  Name: string;
+  Description: string;
+  GroupName: string;
+  DataType: string;
+}
+
+export interface IVariableResponse {
+  Results: IVariable[];
+  Message: string;
+}

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import cls from "./VariableSummaryCard.module.css";
-import type { IVariable } from "../../api/variables.api";
+import type { IVariable } from "../../types/global.types";
 
 export const VariableSummaryCard = ({ variable }: { variable: IVariable }) => (
   <div className={cls.card}>
