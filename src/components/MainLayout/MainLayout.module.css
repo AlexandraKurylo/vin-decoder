@@ -1,46 +1,45 @@
 .mainLayout {
-  height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  gap: 0;
+  min-height: 100dvh;
 }
 
-.mainWrapper {
-  height: 100%;
+.wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: stretch;
-  overflow-y: auto;
+  flex: 1;
 }
 
 .main {
-  width: 100%;
-  flex-grow: 1;
-  color: var(--text-main);
+  flex: 1;
   background: var(--surface-base);
+  overflow-y: auto;
 }
 
-.mainContainer {
+.page {
+  padding-block: 120px;
+}
+
+.pageContainer {
   max-width: 1480px;
   margin: 0 auto;
-  padding: 100px 20px;
+  padding: 0 20px;
 }
 
 .footer {
   font-size: 15px;;
   background: var(--gradient-footer);
-  border-top: 1px solid var(--surface-header);
+  border-top: 1px solid var(--border-color);
   color: var(--text-main);
 }
 
 .footerContainer {
-  padding: 15px 10px;
+  max-width: 1480px;
+  padding: 15px 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   text-align: center;
   flex-wrap: wrap;
 }
+
