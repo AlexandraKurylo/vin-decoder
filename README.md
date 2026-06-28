@@ -6,7 +6,7 @@ AutoID is a web application designed for decoding vehicle VIN (Vehicle Identific
 
 ---
 
-## 🚀 [Live Demo]()
+## 🚀 [Live Demo](https://vin-decoder-orcin.vercel.app/)
 
 ---
 
@@ -120,13 +120,13 @@ git clone [https://github.com/AlexandraKurylo/vin-decoder](https://github.com/Al
 ### 2. Install dependencies:
 
 ```bash
-   npm install
+npm install
 ```
 
 ### 3. Start the development server:
 
 ```bash
-   npm run dev
+npm run dev
 ```
 
 #### 4. Open in browser:
