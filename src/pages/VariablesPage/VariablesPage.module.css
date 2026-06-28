@@ -1,1 +1,88 @@
-.variablesPage {}
+.title {
+  margin-bottom: 25px;
+  font-size: 32px;
+  color: var(--text-main);
+}
+
+.searchBar {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 30px;
+  background: var(--surface-header);
+  border: 1px solid var(--text-main);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-size: 16px;
+}
+
+.variablesPageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  flex-grow: 1;
+  align-content: start;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--brand-primary);
+  flex-wrap: wrap;
+}
+
+.pagination button {
+  padding: 10px 25px;
+  cursor: pointer;
+  background-color: var(--brand-primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.pagination button:disabled {
+  background-color: var(--text-muted);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.noResults {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--brand-primary);
+}
+
+.noResults h3 {
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  .variablesPageGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagination {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .pagination button {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+@media (hover: hover) {
+  .pagination button:hover {
+    filter: brightness(1.2);
+  }
+}

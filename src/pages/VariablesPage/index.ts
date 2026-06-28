@@ -1,1 +1,1 @@
-export * from "./VariablesPage";
+export { VariablesPage } from "./VariablesPage";
