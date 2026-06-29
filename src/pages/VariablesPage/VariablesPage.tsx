@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useGetVariablesQuery } from "../../api/variables.api";
 import { VariableSummaryCard } from "../../components/VariableSummaryCard";
 import cls from "./VariablesPage.module.css";
@@ -9,12 +9,30 @@ export const VariablesPage = () => {
   const { data: variables, isFetching, error } = useGetVariablesQuery();
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 15;
+  const itemsPerPage = 16;
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const handleSearchChange = (value: string) => {
     setSearch(value);
     setCurrentPage(1);
   };
+
+  const handleNextPage = () => {
+    setCurrentPage((prev) => prev + 1);
+    scrollToTop();
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prev) => prev - 1);
+    scrollToTop();
+  };
+
+  useEffect(() => {
+    scrollToTop();
+  }, [currentPage]);
 
   const filteredVariables = useMemo(() => {
     if (!variables) return [];
@@ -57,13 +75,15 @@ export const VariablesPage = () => {
 
           {totalPages > 1 && (
             <div className={cls.pagination}>
-              <button disabled={currentPage === 1} onClick={() => setCurrentPage((prev) => prev - 1)}>
+              <button disabled={currentPage === 1} onClick={handlePrevPage}>
                 Previous
               </button>
+
               <span>
                 Page {currentPage} of {totalPages}
               </span>
-              <button disabled={currentPage === totalPages} onClick={() => setCurrentPage((prev) => prev + 1)}>
+
+              <button disabled={currentPage === totalPages} onClick={handleNextPage}>
                 Next
               </button>
             </div>
