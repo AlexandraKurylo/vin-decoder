@@ -1,3 +1,11 @@
+.pageIndicator {
+  display: inline-block;
+  font-size: 14px;
+  color: rgb(133, 133, 133);
+  margin-bottom: 20px;
+  text-decoration: underline;
+}
+
 .title {
   margin-bottom: 25px;
   font-size: 32px;

@@ -53,6 +53,11 @@ export const VariablesPage = () => {
 
   return (
     <>
+      {totalPages > 1 && (
+        <span className={cls.pageIndicator}>
+          Page {currentPage} of {totalPages}
+        </span>
+      )}
       <h2 className={cls.title}>Vehicle Variables</h2>
       <input
         className={cls.searchBar}
