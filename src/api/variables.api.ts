@@ -15,7 +15,7 @@ export const variablesApi = createApi({
 
       transformErrorResponse: (error: FetchBaseQueryError): IApiError => ({
         status: error.status,
-        message: (error.data as any)?.Message || "Failed to load variables.",
+        message: (error.data as { Message?: string })?.Message || "Failed to load variables.",
       }),
 
       providesTags: ["Variables"],

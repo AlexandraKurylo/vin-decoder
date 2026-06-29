@@ -129,6 +129,6 @@ npm install
 npm run dev
 ```
 
-#### 4. Open in browser:
+### 4. Open in browser:
 
 The app will be running at http://localhost:5173

@@ -1,7 +1,6 @@
 import { createApi, type FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithDelay } from "../api/baseQuery";
 import type { IVinResult, IVinResponse, IApiError } from "../types/global.types";
-
 export const vinApi = createApi({
   reducerPath: "vinApi",
   baseQuery: baseQueryWithDelay,
@@ -25,7 +24,7 @@ export const vinApi = createApi({
 
       transformErrorResponse: (error: FetchBaseQueryError): IApiError => ({
         status: error.status,
-        message: (error.data as any)?.Message || "An error occurred while decoding.",
+        message: (error.data as { Message?: string })?.Message || "An error occurred while decoding.",
       }),
 
       providesTags: ["VIN"],
