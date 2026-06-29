@@ -5,11 +5,12 @@ import cls from "./VariablesPage.module.css";
 import type { IApiError } from "../../types/global.types";
 import { Loader } from "../../components/Loader";
 
+const ITEMS_PER_PAGE = 16;
+
 export const VariablesPage = () => {
   const { data: variables, isFetching, error } = useGetVariablesQuery();
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 16;
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -40,11 +41,11 @@ export const VariablesPage = () => {
     return variables.filter((v) => v.Name?.toLowerCase().includes(query) || v.GroupName?.toLowerCase().includes(query));
   }, [variables, search]);
 
-  const totalPages = Math.ceil(filteredVariables.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredVariables.length / ITEMS_PER_PAGE);
 
   const paginatedVariables = useMemo(() => {
-    const start = (currentPage - 1) * itemsPerPage;
-    return filteredVariables.slice(start, start + itemsPerPage);
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredVariables.slice(start, start + ITEMS_PER_PAGE);
   }, [filteredVariables, currentPage]);
 
   if (isFetching) return <Loader />;
